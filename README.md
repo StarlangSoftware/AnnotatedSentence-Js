@@ -63,7 +63,7 @@ Steps for opening the cloned project:
 * Choose `AnnotatedSentence-Js` file
 * Select open as project option
 * Couple of seconds, dependencies will be downloaded. 
-* 
+
 Detailed Description
 ============
 
