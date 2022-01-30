@@ -137,13 +137,13 @@ export class AnnotatedWord extends Word{
         let result;
         switch (this.language){
             case Language.TURKISH:
-                result = "{turkish=" + name + "}";
+                result = "{turkish=" + this.name + "}";
                 break;
             case Language.ENGLISH:
-                result = "{english=" + name + "}";
+                result = "{english=" + this.name + "}";
                 break;
             case Language.PERSIAN:
-                result = "{persian=" + name + "}";
+                result = "{persian=" + this.name + "}";
                 break;
         }
         if (this.parse != undefined){

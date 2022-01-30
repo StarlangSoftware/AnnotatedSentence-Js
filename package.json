@@ -1,6 +1,6 @@
 {
   "name": "nlptoolkit-annotatedsentence",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "types": "index.js",
@@ -25,7 +25,7 @@
     "nlptoolkit-dependencyparser": "^1.0.0",
     "nlptoolkit-dictionary": "^1.0.2",
     "nlptoolkit-framenet": "^1.0.0",
-    "nlptoolkit-morphologicalanalysis": "^1.0.1",
+    "nlptoolkit-morphologicalanalysis": "^1.0.2",
     "nlptoolkit-namedentityrecognition": "^1.0.0",
     "nlptoolkit-propbank": "^1.0.1",
     "nlptoolkit-sentinet": "^1.0.0",

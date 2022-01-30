@@ -159,13 +159,13 @@
             let result;
             switch (this.language) {
                 case Language_1.Language.TURKISH:
-                    result = "{turkish=" + name + "}";
+                    result = "{turkish=" + this.name + "}";
                     break;
                 case Language_1.Language.ENGLISH:
-                    result = "{english=" + name + "}";
+                    result = "{english=" + this.name + "}";
                     break;
                 case Language_1.Language.PERSIAN:
-                    result = "{persian=" + name + "}";
+                    result = "{persian=" + this.name + "}";
                     break;
             }
             if (this.parse != undefined) {
