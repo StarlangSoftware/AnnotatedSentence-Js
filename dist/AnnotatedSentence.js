@@ -22,11 +22,13 @@
          */
         constructor(fileName) {
             super();
-            this.file = fileName;
-            let data = fs.readFileSync(fileName, 'utf8');
-            let wordList = data.split("\n")[0].split(" ");
-            for (let word of wordList) {
-                this.words.push(new AnnotatedWord_1.AnnotatedWord(word));
+            if (fileName != undefined) {
+                this.file = fileName;
+                let data = fs.readFileSync(fileName, 'utf8');
+                let wordList = data.split("\n")[0].split(" ");
+                for (let word of wordList) {
+                    this.words.push(new AnnotatedWord_1.AnnotatedWord(word));
+                }
             }
         }
         /**
