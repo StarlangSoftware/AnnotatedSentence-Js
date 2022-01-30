@@ -21,13 +21,15 @@ export class AnnotatedSentence extends Sentence{
      * Reads an annotated sentence from a text file.
      * @param fileName File containing the annotated sentence.
      */
-    constructor(fileName: string) {
+    constructor(fileName?: string) {
         super();
-        this.file = fileName
-        let data = fs.readFileSync(fileName, 'utf8')
-        let wordList = data.split("\n")[0].split(" ")
-        for (let word of wordList){
-            this.words.push(new AnnotatedWord(word))
+        if (fileName != undefined){
+            this.file = fileName
+            let data = fs.readFileSync(fileName, 'utf8')
+            let wordList = data.split("\n")[0].split(" ")
+            for (let word of wordList){
+                this.words.push(new AnnotatedWord(word))
+            }
         }
     }
 
