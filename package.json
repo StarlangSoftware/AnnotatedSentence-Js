@@ -27,7 +27,7 @@
     "nlptoolkit-framenet": "^1.0.0",
     "nlptoolkit-morphologicalanalysis": "^1.0.2",
     "nlptoolkit-namedentityrecognition": "^1.0.0",
-    "nlptoolkit-propbank": "^1.0.1",
+    "nlptoolkit-propbank": "^1.0.2",
     "nlptoolkit-sentinet": "^1.0.0",
     "nlptoolkit-wordnet": "^1.0.1",
     "ts-node": "^10.4.0",
