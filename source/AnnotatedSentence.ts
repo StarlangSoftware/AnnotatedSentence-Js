@@ -19,16 +19,37 @@ export class AnnotatedSentence extends Sentence{
 
     /**
      * Reads an annotated sentence from a text file.
-     * @param fileName File containing the annotated sentence.
+     * Converts a simple sentence to an annotated sentence.
+     * @param param File containing the annotated sentence. OR Simple sentence.
      */
-    constructor(fileName?: string) {
+    constructor(param?: string){
+
         super();
-        if (fileName != undefined){
-            this.file = fileName
-            let data = fs.readFileSync(fileName, 'utf8')
-            let wordList = data.split("\n")[0].split(" ")
-            for (let word of wordList){
-                this.words.push(new AnnotatedWord(word))
+        this.words = []
+
+        if(param !== undefined){
+
+            if(param.includes(".txt")){
+
+                let fileName : string = param
+                if (fileName !== undefined) {
+                    this.file = fileName;
+                    let data : string = fs.readFileSync(fileName, 'utf8');
+                    let wordList : string[] = data.split("\n")[0].split(" ");
+                    for (let word of wordList) {
+                        this.words.push(new AnnotatedWord(word));
+                    }
+                }
+            }
+            else{
+
+                let sentence : string = param
+                let wordList : string[] = sentence.split(" ");
+                for (let word of wordList){
+                    if (word !== ""){
+                        this.words.push(new AnnotatedWord(word));
+                    }
+                }
             }
         }
     }

@@ -12,9 +12,10 @@ export declare class AnnotatedSentence extends Sentence {
     private file;
     /**
      * Reads an annotated sentence from a text file.
-     * @param fileName File containing the annotated sentence.
+     * Converts a simple sentence to an annotated sentence.
+     * @param param File containing the annotated sentence. OR Simple sentence.
      */
-    constructor(fileName?: string);
+    constructor(param?: string);
     /**
      * Returns file name of the sentence
      * @return File name of the sentence
