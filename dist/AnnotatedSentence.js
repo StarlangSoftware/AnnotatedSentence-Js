@@ -37,8 +37,7 @@
                     }
                 }
                 else {
-                    let sentence = param;
-                    let wordList = sentence.split(" ");
+                    let wordList = param.split(" ");
                     for (let word of wordList) {
                         if (word !== "") {
                             this.words.push(new AnnotatedWord_1.AnnotatedWord(word));
