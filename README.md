@@ -24,7 +24,7 @@ For Developers
 ============
 
 You can also see [Python](https://github.com/starlangsoftware/AnnotatedSentence-Py), [Cython](https://github.com/starlangsoftware/AnnotatedSentence-Cy), [Java](https://github.com/starlangsoftware/AnnotatedSentence), 
-[C++](https://github.com/starlangsoftware/AnnotatedSentence-CPP), [Swift](https://github.com/starlangsoftware/AnnotatedSentence-Swift), 
+[C++](https://github.com/starlangsoftware/AnnotatedSentence-CPP), [C](https://github.com/starlangsoftware/AnnotatedSentence-C), [Swift](https://github.com/starlangsoftware/AnnotatedSentence-Swift), 
 or [C#](https://github.com/starlangsoftware/AnnotatedSentence-CS) repository.
 
 ## Requirements
