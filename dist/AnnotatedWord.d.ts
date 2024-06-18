@@ -166,6 +166,12 @@ export declare class AnnotatedWord extends Word {
      * English, it returns dependency features according to the Penn tag of the current word.
      */
     getUniversalDependencyFeatures(): Array<string>;
+    /**
+     * Returns the connlu format string for this word. Adds surface form, root, universal pos tag, features, and
+     * universal dependency information.
+     * @param sentenceLength Number of words in the sentence.
+     * @return The connlu format string for this word.
+     */
     getUniversalDependencyFormat(sentenceLength: number): string;
     /**
      * Returns the CCG layer of the word.
@@ -187,6 +193,10 @@ export declare class AnnotatedWord extends Word {
      * @param posTag New posTag of the word.
      */
     setPosTag(posTag: string): void;
+    /**
+     * Checks the gazetteer and sets the named entity tag accordingly.
+     * @param gazetteer Gazetteer used to set named entity tag.
+     */
     checkGazetteer(gazetteer: Gazetteer): void;
     /**
      * Converts a language string to language.

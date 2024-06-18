@@ -36,6 +36,12 @@
                 this.sentences.push(sentence);
             }
         }
+        /**
+         * Compares the corpus with the given corpus and returns a parser evaluation score for this comparison. The result
+         * is calculated by summing up the parser evaluation scores of sentence by sentence dependency relation comparisons.
+         * @param corpus Corpus to be compared.
+         * @return A parser evaluation score object.
+         */
         compareParses(corpus) {
             let result = new ParserEvaluationScore_1.ParserEvaluationScore();
             for (let i = 0; i < this.sentences.length; i++) {

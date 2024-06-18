@@ -27,6 +27,12 @@ export class AnnotatedCorpus extends Corpus{
         }
     }
 
+    /**
+     * Compares the corpus with the given corpus and returns a parser evaluation score for this comparison. The result
+     * is calculated by summing up the parser evaluation scores of sentence by sentence dependency relation comparisons.
+     * @param corpus Corpus to be compared.
+     * @return A parser evaluation score object.
+     */
     compareParses(corpus: AnnotatedCorpus): ParserEvaluationScore{
         let result = new ParserEvaluationScore();
         for (let i = 0; i < this.sentences.length; i++){

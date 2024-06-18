@@ -15,7 +15,7 @@ import {SynSet} from "nlptoolkit-wordnet/dist/SynSet";
 
 export class AnnotatedSentence extends Sentence {
 
-    private file: string
+    private readonly file: string
 
     /**
      * Reads an annotated sentence from a text file.
@@ -112,6 +112,13 @@ export class AnnotatedSentence extends Sentence {
         return false;
     }
 
+    /**
+     * Replaces id's of predicates, which have previousId as synset id, with currentId. Replaces also predicate id's of
+     * frame elements, which have predicate id's previousId, with currentId.
+     * @param previousId Previous id of the synset.
+     * @param currentId Replacement id.
+     * @return Returns true, if any replacement has been done; false otherwise.
+     */
     updateConnectedPredicate(previousId: string, currentId: string): boolean {
         let modified = false;
         for (let word of this.words) {
@@ -365,6 +372,12 @@ export class AnnotatedSentence extends Sentence {
         return sentenceString;
     }
 
+    /**
+     * Compares the sentence with the given sentence and returns a parser evaluation score for this comparison. The result
+     * is calculated by summing up the parser evaluation scores of word by word dpendency relation comparisons.
+     * @param sentence Sentence to be compared.
+     * @return A parser evaluation score object.
+     */
     compareParses(sentence: AnnotatedSentence): ParserEvaluationScore {
         let score = new ParserEvaluationScore();
         for (let i = 0; i < this.wordCount(); i++) {
@@ -389,6 +402,11 @@ export class AnnotatedSentence extends Sentence {
         }
     }
 
+    /**
+     * Returns the connlu format of the sentence with appended prefix string based on the path.
+     * @param path Path of the sentence.
+     * @return The connlu format of the sentence with appended prefix string based on the path.
+     */
     getUniversalDependencyFormat(path?: string): string {
         let result
         if (path != undefined) {

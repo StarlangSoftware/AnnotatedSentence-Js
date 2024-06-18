@@ -699,6 +699,12 @@ export class AnnotatedWord extends Word{
         return featureList;
     }
 
+    /**
+     * Returns the connlu format string for this word. Adds surface form, root, universal pos tag, features, and
+     * universal dependency information.
+     * @param sentenceLength Number of words in the sentence.
+     * @return The connlu format string for this word.
+     */
     getUniversalDependencyFormat(sentenceLength: number): string{
         let uPos = this.getUniversalDependencyPos();
         let result
@@ -775,6 +781,10 @@ export class AnnotatedWord extends Word{
         this.posTag = posTag
     }
 
+    /**
+     * Checks the gazetteer and sets the named entity tag accordingly.
+     * @param gazetteer Gazetteer used to set named entity tag.
+     */
     checkGazetteer(gazetteer: Gazetteer){
         let wordLowercase = this.name.toLocaleLowerCase("tr");
         if (gazetteer.contains(wordLowercase) && this.parse.containsTag(MorphologicalTag.PROPERNOUN)){
