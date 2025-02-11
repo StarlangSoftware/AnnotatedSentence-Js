@@ -2,8 +2,6 @@ import {Word} from "nlptoolkit-dictionary/dist/Dictionary/Word";
 import {MorphologicalParse} from "nlptoolkit-morphologicalanalysis/dist/MorphologicalAnalysis/MorphologicalParse";
 import {MetamorphicParse} from "nlptoolkit-morphologicalanalysis/dist/MorphologicalAnalysis/MetamorphicParse";
 import {NamedEntityType} from "nlptoolkit-namedentityrecognition/dist/NamedEntityType";
-import {Argument} from "nlptoolkit-propbank/dist/Argument";
-import {FrameElement} from "nlptoolkit-framenet/dist/FrameElement";
 import {UniversalDependencyRelation} from "nlptoolkit-dependencyparser/dist/Universal/UniversalDependencyRelation";
 import {PolarityType} from "nlptoolkit-sentinet/dist/PolarityType";
 import {Slot} from "nlptoolkit-namedentityrecognition/dist/Slot";
@@ -13,6 +11,8 @@ import {FsmParse} from "nlptoolkit-morphologicalanalysis/dist/MorphologicalAnaly
 import {ViewLayerType} from "./ViewLayerType";
 import {Gazetteer} from "nlptoolkit-namedentityrecognition/dist/Gazetteer";
 import {MorphologicalTag} from "nlptoolkit-morphologicalanalysis/dist/MorphologicalAnalysis/MorphologicalTag";
+import {ArgumentList} from "nlptoolkit-propbank/dist/ArgumentList";
+import {FrameElementList} from "nlptoolkit-framenet/dist/FrameElementList";
 
 export class AnnotatedWord extends Word{
 
@@ -31,15 +31,15 @@ export class AnnotatedWord extends Word{
     private metamorphicParse: MetamorphicParse = undefined
     private semantic: string = undefined
     private namedEntityType: NamedEntityType = undefined
-    private argument: Argument = undefined
-    private frameElement: FrameElement = undefined
+    private argumentList: ArgumentList = undefined
+    private frameElementList: FrameElementList = undefined
     private universalDependency: UniversalDependencyRelation = undefined
     private shallowParse: string = undefined
     private polarity: PolarityType = undefined
     private slot: Slot = undefined
     private ccg: string = undefined
     private posTag: string = undefined
-    private language: Language = Language.TURKISH
+    private readonly language: Language = Language.TURKISH
 
     constructor(word: string, second?: any) {
         super("");
@@ -72,7 +72,7 @@ export class AnnotatedWord extends Word{
                                     this.namedEntityType = NamedEntityTypeStatic.getNamedEntityType(layerValue);
                                 } else {
                                     if (layerType == "propbank"){
-                                        this.argument = new Argument(layerValue);
+                                        this.argumentList = new ArgumentList(layerValue);
                                     } else {
                                         if (layerType == "shallowParse"){
                                             this.shallowParse = layerValue;
@@ -82,7 +82,7 @@ export class AnnotatedWord extends Word{
                                                 this.universalDependency = new UniversalDependencyRelation(Number.parseInt(values[0]), values[1]);
                                             } else {
                                                 if (layerType == "framenet"){
-                                                    this.frameElement = new FrameElement(layerValue);
+                                                    this.frameElementList = new FrameElementList(layerValue);
                                                 } else {
                                                     if (layerType == "slot"){
                                                         this.slot = new Slot(layerValue);
@@ -113,16 +113,13 @@ export class AnnotatedWord extends Word{
             if (second instanceof MorphologicalParse){
                 this.parse = second
                 this.namedEntityType = NamedEntityType.NONE;
-                this.argument = new Argument("NONE", null);
             } else {
                 if (second instanceof  FsmParse){
                     this.parse = second
                     this.setMetamorphicParse(second.getWithList())
                     this.namedEntityType = NamedEntityType.NONE;
-                    this.argument = new Argument("NONE", null);
                 } else {
                     this.namedEntityType = second
-                    this.argument = new Argument("NONE", null);
                 }
             }
         }
@@ -158,11 +155,11 @@ export class AnnotatedWord extends Word{
         if (this.namedEntityType != undefined){
             result = result + "{namedEntity=" + NamedEntityTypeStatic.getNamedEntity(this.namedEntityType) + "}";
         }
-        if (this.argument != undefined){
-            result = result + "{propbank=" + this.argument.toString() + "}";
+        if (this.argumentList != undefined){
+            result = result + "{propbank=" + this.argumentList.toString() + "}";
         }
-        if (this.frameElement != undefined){
-            result = result + "{framenet=" + this.frameElement.toString() + "}";
+        if (this.frameElementList != undefined){
+            result = result + "{framenet=" + this.frameElementList.toString() + "}";
         }
         if (this.shallowParse != undefined){
             result = result + "{shallowParse=" + this.shallowParse + "}";
@@ -215,8 +212,8 @@ export class AnnotatedWord extends Word{
             case ViewLayerType.TURKISH_WORD:
                 return this.name;
             case ViewLayerType.PROPBANK:
-                if (this.argument != undefined){
-                    return this.argument.toString();
+                if (this.argumentList != undefined){
+                    return this.argumentList.toString();
                 }
                 break;
             case ViewLayerType.DEPENDENCY:
@@ -329,19 +326,19 @@ export class AnnotatedWord extends Word{
      * Returns the semantic role layer of the word.
      * @return Semantic role tag of the word.
      */
-    getArgument(): Argument{
-        return this.argument
+    getArgumentList(): ArgumentList{
+        return this.argumentList
     }
 
     /**
      * Sets the semantic role layer of the word.
-     * @param argument New semantic role tag of the word.
+     * @param argumentList New semantic role tag of the word.
      */
-    setArgument(argument?: string){
-        if (argument != undefined){
-            this.argument = new Argument(argument);
+    setArgumentList(argumentList?: string){
+        if (argumentList != undefined){
+            this.argumentList = new ArgumentList(argumentList);
         } else {
-            this.argument = undefined;
+            this.argumentList = undefined;
         }
     }
 
@@ -349,19 +346,19 @@ export class AnnotatedWord extends Word{
      * Returns the frameNet layer of the word.
      * @return FrameNet tag of the word.
      */
-    getFrameElement(): FrameElement{
-        return this.frameElement
+    getFrameElementList(): FrameElementList{
+        return this.frameElementList
     }
 
     /**
      * Sets the framenet layer of the word.
-     * @param frameElement New frame element tag of the word.
+     * @param frameElementList New frame element tag of the word.
      */
-    setFrameElement(frameElement?: string){
-        if (frameElement != undefined){
-            this.frameElement = new FrameElement(frameElement);
+    setFrameElementList(frameElementList?: string){
+        if (frameElementList != undefined){
+            this.frameElementList = new FrameElementList(frameElementList);
         } else {
-            this.frameElement = undefined;
+            this.frameElementList = undefined;
         }
     }
 

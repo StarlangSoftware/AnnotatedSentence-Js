@@ -2,14 +2,14 @@ import { Word } from "nlptoolkit-dictionary/dist/Dictionary/Word";
 import { MorphologicalParse } from "nlptoolkit-morphologicalanalysis/dist/MorphologicalAnalysis/MorphologicalParse";
 import { MetamorphicParse } from "nlptoolkit-morphologicalanalysis/dist/MorphologicalAnalysis/MetamorphicParse";
 import { NamedEntityType } from "nlptoolkit-namedentityrecognition/dist/NamedEntityType";
-import { Argument } from "nlptoolkit-propbank/dist/Argument";
-import { FrameElement } from "nlptoolkit-framenet/dist/FrameElement";
 import { UniversalDependencyRelation } from "nlptoolkit-dependencyparser/dist/Universal/UniversalDependencyRelation";
 import { PolarityType } from "nlptoolkit-sentinet/dist/PolarityType";
 import { Slot } from "nlptoolkit-namedentityrecognition/dist/Slot";
 import { Language } from "./Language";
 import { ViewLayerType } from "./ViewLayerType";
 import { Gazetteer } from "nlptoolkit-namedentityrecognition/dist/Gazetteer";
+import { ArgumentList } from "nlptoolkit-propbank/dist/ArgumentList";
+import { FrameElementList } from "nlptoolkit-framenet/dist/FrameElementList";
 export declare class AnnotatedWord extends Word {
     /**
      * In order to add another layer, do the following:
@@ -26,15 +26,15 @@ export declare class AnnotatedWord extends Word {
     private metamorphicParse;
     private semantic;
     private namedEntityType;
-    private argument;
-    private frameElement;
+    private argumentList;
+    private frameElementList;
     private universalDependency;
     private shallowParse;
     private polarity;
     private slot;
     private ccg;
     private posTag;
-    private language;
+    private readonly language;
     constructor(word: string, second?: any);
     /**
      * Converts an {@link AnnotatedWord} to string. For each annotation layer, the method puts a left brace, layer name,
@@ -92,22 +92,22 @@ export declare class AnnotatedWord extends Word {
      * Returns the semantic role layer of the word.
      * @return Semantic role tag of the word.
      */
-    getArgument(): Argument;
+    getArgumentList(): ArgumentList;
     /**
      * Sets the semantic role layer of the word.
-     * @param argument New semantic role tag of the word.
+     * @param argumentList New semantic role tag of the word.
      */
-    setArgument(argument?: string): void;
+    setArgumentList(argumentList?: string): void;
     /**
      * Returns the frameNet layer of the word.
      * @return FrameNet tag of the word.
      */
-    getFrameElement(): FrameElement;
+    getFrameElementList(): FrameElementList;
     /**
      * Sets the framenet layer of the word.
-     * @param frameElement New frame element tag of the word.
+     * @param frameElementList New frame element tag of the word.
      */
-    setFrameElement(frameElement?: string): void;
+    setFrameElementList(frameElementList?: string): void;
     /**
      * Returns the slot filling layer of the word.
      * @return Slot tag of the word.

@@ -86,9 +86,10 @@
         containsPredicate() {
             for (let word of this.words) {
                 let annotatedWord = word;
-                if (annotatedWord.getArgument() != undefined &&
-                    annotatedWord.getArgument().getArgumentType() == "PREDICATE") {
-                    return true;
+                if (annotatedWord.getArgumentList() != undefined) {
+                    if (annotatedWord.getArgumentList().containsPredicate()) {
+                        return true;
+                    }
                 }
             }
             return false;
@@ -101,9 +102,10 @@
         containsFramePredicate() {
             for (let word of this.words) {
                 let annotatedWord = word;
-                if (annotatedWord.getFrameElement() != undefined &&
-                    annotatedWord.getFrameElement().getFrameElementType() == "PREDICATE") {
-                    return true;
+                if (annotatedWord.getFrameElementList() != undefined) {
+                    if (annotatedWord.getFrameElementList().containsPredicate()) {
+                        return true;
+                    }
                 }
             }
             return false;
@@ -119,15 +121,19 @@
             let modified = false;
             for (let word of this.words) {
                 let annotatedWord = word;
-                if (annotatedWord.getArgument() != undefined && annotatedWord.getArgument().getId() != null &&
-                    annotatedWord.getArgument().getId() == previousId) {
-                    annotatedWord.setArgument(annotatedWord.getArgument().getArgumentType() + "$" + currentId);
-                    modified = true;
+                let argumentList = annotatedWord.getArgumentList();
+                if (argumentList != undefined) {
+                    if (argumentList.containsPredicateWithId(previousId)) {
+                        argumentList.updateConnectedId(previousId, currentId);
+                        modified = true;
+                    }
                 }
-                if (annotatedWord.getFrameElement() != undefined && annotatedWord.getFrameElement().getId() != null &&
-                    annotatedWord.getFrameElement().getId() == previousId) {
-                    annotatedWord.setFrameElement(annotatedWord.getFrameElement().getFrameElementType() + "$" + annotatedWord.getFrameElement().getFrame() + "$" + currentId);
-                    modified = true;
+                let frameElementList = annotatedWord.getFrameElementList();
+                if (frameElementList != undefined) {
+                    if (frameElementList.containsPredicateWithId(previousId)) {
+                        frameElementList.updateConnectedId(previousId, currentId);
+                        modified = true;
+                    }
                 }
             }
             return modified;

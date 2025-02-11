@@ -4,7 +4,7 @@
         if (v !== undefined) module.exports = v;
     }
     else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "nlptoolkit-dictionary/dist/Dictionary/Word", "nlptoolkit-morphologicalanalysis/dist/MorphologicalAnalysis/MorphologicalParse", "nlptoolkit-morphologicalanalysis/dist/MorphologicalAnalysis/MetamorphicParse", "nlptoolkit-namedentityrecognition/dist/NamedEntityType", "nlptoolkit-propbank/dist/Argument", "nlptoolkit-framenet/dist/FrameElement", "nlptoolkit-dependencyparser/dist/Universal/UniversalDependencyRelation", "nlptoolkit-sentinet/dist/PolarityType", "nlptoolkit-namedentityrecognition/dist/Slot", "./Language", "nlptoolkit-namedentityrecognition/dist/NamedEntityTypeStatic", "nlptoolkit-morphologicalanalysis/dist/MorphologicalAnalysis/FsmParse", "./ViewLayerType", "nlptoolkit-morphologicalanalysis/dist/MorphologicalAnalysis/MorphologicalTag"], factory);
+        define(["require", "exports", "nlptoolkit-dictionary/dist/Dictionary/Word", "nlptoolkit-morphologicalanalysis/dist/MorphologicalAnalysis/MorphologicalParse", "nlptoolkit-morphologicalanalysis/dist/MorphologicalAnalysis/MetamorphicParse", "nlptoolkit-namedentityrecognition/dist/NamedEntityType", "nlptoolkit-dependencyparser/dist/Universal/UniversalDependencyRelation", "nlptoolkit-sentinet/dist/PolarityType", "nlptoolkit-namedentityrecognition/dist/Slot", "./Language", "nlptoolkit-namedentityrecognition/dist/NamedEntityTypeStatic", "nlptoolkit-morphologicalanalysis/dist/MorphologicalAnalysis/FsmParse", "./ViewLayerType", "nlptoolkit-morphologicalanalysis/dist/MorphologicalAnalysis/MorphologicalTag", "nlptoolkit-propbank/dist/ArgumentList", "nlptoolkit-framenet/dist/FrameElementList"], factory);
     }
 })(function (require, exports) {
     "use strict";
@@ -14,8 +14,6 @@
     const MorphologicalParse_1 = require("nlptoolkit-morphologicalanalysis/dist/MorphologicalAnalysis/MorphologicalParse");
     const MetamorphicParse_1 = require("nlptoolkit-morphologicalanalysis/dist/MorphologicalAnalysis/MetamorphicParse");
     const NamedEntityType_1 = require("nlptoolkit-namedentityrecognition/dist/NamedEntityType");
-    const Argument_1 = require("nlptoolkit-propbank/dist/Argument");
-    const FrameElement_1 = require("nlptoolkit-framenet/dist/FrameElement");
     const UniversalDependencyRelation_1 = require("nlptoolkit-dependencyparser/dist/Universal/UniversalDependencyRelation");
     const PolarityType_1 = require("nlptoolkit-sentinet/dist/PolarityType");
     const Slot_1 = require("nlptoolkit-namedentityrecognition/dist/Slot");
@@ -24,6 +22,8 @@
     const FsmParse_1 = require("nlptoolkit-morphologicalanalysis/dist/MorphologicalAnalysis/FsmParse");
     const ViewLayerType_1 = require("./ViewLayerType");
     const MorphologicalTag_1 = require("nlptoolkit-morphologicalanalysis/dist/MorphologicalAnalysis/MorphologicalTag");
+    const ArgumentList_1 = require("nlptoolkit-propbank/dist/ArgumentList");
+    const FrameElementList_1 = require("nlptoolkit-framenet/dist/FrameElementList");
     class AnnotatedWord extends Word_1.Word {
         constructor(word, second) {
             super("");
@@ -42,8 +42,8 @@
             this.metamorphicParse = undefined;
             this.semantic = undefined;
             this.namedEntityType = undefined;
-            this.argument = undefined;
-            this.frameElement = undefined;
+            this.argumentList = undefined;
+            this.frameElementList = undefined;
             this.universalDependency = undefined;
             this.shallowParse = undefined;
             this.polarity = undefined;
@@ -85,7 +85,7 @@
                                     }
                                     else {
                                         if (layerType == "propbank") {
-                                            this.argument = new Argument_1.Argument(layerValue);
+                                            this.argumentList = new ArgumentList_1.ArgumentList(layerValue);
                                         }
                                         else {
                                             if (layerType == "shallowParse") {
@@ -98,7 +98,7 @@
                                                 }
                                                 else {
                                                     if (layerType == "framenet") {
-                                                        this.frameElement = new FrameElement_1.FrameElement(layerValue);
+                                                        this.frameElementList = new FrameElementList_1.FrameElementList(layerValue);
                                                     }
                                                     else {
                                                         if (layerType == "slot") {
@@ -134,18 +134,15 @@
                 if (second instanceof MorphologicalParse_1.MorphologicalParse) {
                     this.parse = second;
                     this.namedEntityType = NamedEntityType_1.NamedEntityType.NONE;
-                    this.argument = new Argument_1.Argument("NONE", null);
                 }
                 else {
                     if (second instanceof FsmParse_1.FsmParse) {
                         this.parse = second;
                         this.setMetamorphicParse(second.getWithList());
                         this.namedEntityType = NamedEntityType_1.NamedEntityType.NONE;
-                        this.argument = new Argument_1.Argument("NONE", null);
                     }
                     else {
                         this.namedEntityType = second;
-                        this.argument = new Argument_1.Argument("NONE", null);
                     }
                 }
             }
@@ -180,11 +177,11 @@
             if (this.namedEntityType != undefined) {
                 result = result + "{namedEntity=" + NamedEntityTypeStatic_1.NamedEntityTypeStatic.getNamedEntity(this.namedEntityType) + "}";
             }
-            if (this.argument != undefined) {
-                result = result + "{propbank=" + this.argument.toString() + "}";
+            if (this.argumentList != undefined) {
+                result = result + "{propbank=" + this.argumentList.toString() + "}";
             }
-            if (this.frameElement != undefined) {
-                result = result + "{framenet=" + this.frameElement.toString() + "}";
+            if (this.frameElementList != undefined) {
+                result = result + "{framenet=" + this.frameElementList.toString() + "}";
             }
             if (this.shallowParse != undefined) {
                 result = result + "{shallowParse=" + this.shallowParse + "}";
@@ -236,8 +233,8 @@
                 case ViewLayerType_1.ViewLayerType.TURKISH_WORD:
                     return this.name;
                 case ViewLayerType_1.ViewLayerType.PROPBANK:
-                    if (this.argument != undefined) {
-                        return this.argument.toString();
+                    if (this.argumentList != undefined) {
+                        return this.argumentList.toString();
                     }
                     break;
                 case ViewLayerType_1.ViewLayerType.DEPENDENCY:
@@ -343,38 +340,38 @@
          * Returns the semantic role layer of the word.
          * @return Semantic role tag of the word.
          */
-        getArgument() {
-            return this.argument;
+        getArgumentList() {
+            return this.argumentList;
         }
         /**
          * Sets the semantic role layer of the word.
-         * @param argument New semantic role tag of the word.
+         * @param argumentList New semantic role tag of the word.
          */
-        setArgument(argument) {
-            if (argument != undefined) {
-                this.argument = new Argument_1.Argument(argument);
+        setArgumentList(argumentList) {
+            if (argumentList != undefined) {
+                this.argumentList = new ArgumentList_1.ArgumentList(argumentList);
             }
             else {
-                this.argument = undefined;
+                this.argumentList = undefined;
             }
         }
         /**
          * Returns the frameNet layer of the word.
          * @return FrameNet tag of the word.
          */
-        getFrameElement() {
-            return this.frameElement;
+        getFrameElementList() {
+            return this.frameElementList;
         }
         /**
          * Sets the framenet layer of the word.
-         * @param frameElement New frame element tag of the word.
+         * @param frameElementList New frame element tag of the word.
          */
-        setFrameElement(frameElement) {
-            if (frameElement != undefined) {
-                this.frameElement = new FrameElement_1.FrameElement(frameElement);
+        setFrameElementList(frameElementList) {
+            if (frameElementList != undefined) {
+                this.frameElementList = new FrameElementList_1.FrameElementList(frameElementList);
             }
             else {
-                this.frameElement = undefined;
+                this.frameElementList = undefined;
             }
         }
         /**
