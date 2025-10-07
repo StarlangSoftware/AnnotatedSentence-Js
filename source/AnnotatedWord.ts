@@ -222,8 +222,8 @@ export class AnnotatedWord extends Word{
                 }
                 break;
             case ViewLayerType.FRAMENET:
-                if (frameElement != null){
-                    return frameElement.toString();
+                if (this.frameElementList != null){
+                    return this.frameElementList.toString();
                 }
                 break;
             case ViewLayerType.SLOT:

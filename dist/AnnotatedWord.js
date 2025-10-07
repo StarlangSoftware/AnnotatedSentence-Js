@@ -243,8 +243,8 @@
                     }
                     break;
                 case ViewLayerType_1.ViewLayerType.FRAMENET:
-                    if (frameElement != null) {
-                        return frameElement.toString();
+                    if (this.frameElementList != null) {
+                        return this.frameElementList.toString();
                     }
                     break;
                 case ViewLayerType_1.ViewLayerType.SLOT:
