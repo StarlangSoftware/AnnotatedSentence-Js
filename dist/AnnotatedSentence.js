@@ -25,7 +25,8 @@
             super();
             this.words = [];
             if (param !== undefined) {
-                if (param.includes(".txt")) {
+                if (param.includes(".txt") || param.includes(".train") ||
+                    param.includes(".dev") || param.includes(".test")) {
                     let fileName = param;
                     if (fileName !== undefined) {
                         this.file = fileName;

@@ -26,7 +26,8 @@ export class AnnotatedSentence extends Sentence {
         super();
         this.words = []
         if (param !== undefined) {
-            if (param.includes(".txt")) {
+            if (param.includes(".txt") || param.includes(".train") ||
+                param.includes(".dev") || param.includes(".test")) {
                 let fileName: string = param
                 if (fileName !== undefined) {
                     this.file = fileName;
