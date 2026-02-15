@@ -1,3 +1,4 @@
+"use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -12,22 +13,11 @@ var __createBinding = (this && this.__createBinding) || (Object.create ? (functi
 var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
-(function (factory) {
-    if (typeof module === "object" && typeof module.exports === "object") {
-        var v = factory(require, exports);
-        if (v !== undefined) module.exports = v;
-    }
-    else if (typeof define === "function" && define.amd) {
-        define(["require", "exports", "./AnnotatedSentence", "./AnnotatedCorpus", "./AnnotatedPhrase", "./AnnotatedWord", "./Language", "./ViewLayerType"], factory);
-    }
-})(function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    __exportStar(require("./AnnotatedSentence"), exports);
-    __exportStar(require("./AnnotatedCorpus"), exports);
-    __exportStar(require("./AnnotatedPhrase"), exports);
-    __exportStar(require("./AnnotatedWord"), exports);
-    __exportStar(require("./Language"), exports);
-    __exportStar(require("./ViewLayerType"), exports);
-});
+Object.defineProperty(exports, "__esModule", { value: true });
+__exportStar(require("./AnnotatedSentence"), exports);
+__exportStar(require("./AnnotatedCorpus"), exports);
+__exportStar(require("./AnnotatedPhrase"), exports);
+__exportStar(require("./AnnotatedWord"), exports);
+__exportStar(require("./Language"), exports);
+__exportStar(require("./ViewLayerType"), exports);
 //# sourceMappingURL=index.js.map
